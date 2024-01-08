@@ -106,7 +106,7 @@ sudo sed -i 's/^    theme:.*/    theme: WelcomeXP/' /etc/lightdm/web-greeter.yml
 
 # run the discord patch command, then uninstall.
 discord-canary-update-skip
-sudo pacman -R discord-canary-update-skip
+yay -R --noconfirm discord-canary-update-skip-git
 
 # delete git repos after everything has been installed.
 sudo rm -r yay WelcomeXP Tela-icon-theme Qogir-theme posy-improved-cursor-linux synth-shell
