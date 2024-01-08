@@ -23,5 +23,5 @@ chmod +x simplebrian.sh
 ./simplebrian.sh
 ```
 do note that you cannot run the script directly with sudo, or as root, because the `makepkg` command to build and install `yay` will refuse to work in a root environment.
-this is a security measure the srcipt works around by taking advantage of the sudo session created earlier to make prolific use of the sudo command, while also allowing `makepkg`
+this is a security measure the script works around by taking advantage of the sudo session created earlier to make prolific use of the sudo command, while also allowing `makepkg`
 to run in a non-root enviroment to install `yay` with.
