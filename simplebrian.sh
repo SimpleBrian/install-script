@@ -13,8 +13,8 @@ fi
 cd
 echo -e '\033[1mWelcome to the SimpleBrian installation script!\033[0m'
 echo
-echo -e '\033[1mBefore we run the script, it is important that you have recently used sudo, and run the script before the sudo timeout occurs (this is done if you want the script to run fully automated).033[0m'
-echo -e '\033[1mPlease also make sure Secure Boot is in setup mode, so that we can create, sign, and enroll the necessary keys to enable Secure Boot (in the event you wish to dual-boot Windows).033[0m'
+echo -e '\033[1mBefore we run the script, it is important that you have recently used sudo, and run the script before the sudo timeout occurs (this is done if you want the script to run fully automated).\033[0m'
+echo -e '\033[1mPlease also make sure Secure Boot is in setup mode, so that we can create, sign, and enroll the necessary keys to enable Secure Boot (in the event you wish to dual-boot Windows).\033[0m'
 echo
 read -p "With that said, are you ready to install everything? [Y/N] " -r
 echo
