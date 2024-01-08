@@ -29,7 +29,7 @@ sudo sed -i '38iILoveCandy' /etc/pacman.conf
 # update any outdated packages before officially beginning.
 sudo pacman -Syu --noconfirm
 
-# installs all the applications and dependancies user would ever need (remember to tweak when inding apps you like and/or need).
+# installs all the applications and dependancies user would ever need (remember to tweak when finding apps you like and/or need).
 sudo pacman -S --noconfirm budgie-desktop budgie-extras lightdm bluez blueman bluez-utils tilix nemo gtk-engine-murrine gtk-engines pipewire plank vlc fuse2 fuse3 intel-ucode ufw neofetch gnome-system-monitor wget sassc solaar gthumb gedit powerline-fonts sbctl steam base-devel git noto-fonts cups nss-mdns ghostscript xorg-server xorg-apps xorg-xinit xorg-twm xorg-xclock xterm
 
 # build and install an AUR helper, yay.
@@ -104,13 +104,17 @@ sudo sed -i 's/^#greeter-session=.*/greeter-session=web-greeter/' /etc/lightdm/l
 sudo sed -i 's/^#user-session=.*/user-session=budgie-desktop/' /etc/lightdm/lightdm.conf
 sudo sed -i 's/^    theme:.*/    theme: WelcomeXP/' /etc/lightdm/web-greeter.yml
 
+# run the discord patch command, then uninstall.
+discord-canary-update-skip
+sudo pacman -R discord-canary-update-skip
+
 # delete git repos after everything has been installed.
-rm -r yay WelcomeXP Tela-icon-theme Qogir-theme posy-improved-cursor-linux synth-shell
+sudo rm -r yay WelcomeXP Tela-icon-theme Qogir-theme posy-improved-cursor-linux synth-shell
 
 # aggresively clean yay and pacman cache, and uninstall any unused dependencies.
 sudo pacman -Scc --noconfirm
 yay -Scc --noconfirm
-sudo pacman -Rsn $(pacman -Qdtq)
+sudo pacman -Rsn --noconfirm $(pacman -Qdtq)
 
 # download appimages
 wget "https://github.com/ppy/osu/releases/latest/download/osu.AppImage"
@@ -121,9 +125,9 @@ sudo sbctl enroll-keys -m
 sudo sbctl sign -s /boot/vmlinuz-linux
 sudo sbctl sign -s /boot/EFI/BOOT/BOOTX64.EFI
 sudo sbctl sign -s /boot/EFI/systemd/systemd-bootx64.efi
-sudo sbctl sign -s /usr/lib/systemd/boot/efi/systemd-bootx64.efi.signed
+sudo sbctl sign -s -o /usr/lib/systemd/boot/efi/systemd-bootx64.efi.signed /usr/lib/systemd/boot/efi/systemd-bootx64.efi
 
-# create a 4GB swapfile and enable it.
+# create a 4GB swapfile and enable it (remember to adjust swappiness later).
 sudo dd if=/dev/zero of=/swapfile bs=1M count=4k status=progress
 sudo chmod 0600 /swapfile
 sudo mkswap -U clear /swapfile
