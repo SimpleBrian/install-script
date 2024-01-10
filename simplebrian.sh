@@ -28,22 +28,8 @@ sudo sed -i '38iILoveCandy' /etc/pacman.conf
 # update any outdated packages before officially beginning.
 sudo pacman -Syu --noconfirm
 
-# ask whether or not user has setup mode enable for secure boot, creating and enrolling the keys, and signing the kernels if so.
-read -p "Do you have Setup Mode enabled in Secure Boot (for dual-booting Windows)? [Y/N] " -r
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
-# create, sign, and enroll keys to enable secure boot.
-sudo pacman -S sbctl
-sudo sbctl create-keys
-sudo sbctl enroll-keys -m
-sudo sbctl sign -s /boot/vmlinuz-linux
-sudo sbctl sign -s /boot/EFI/BOOT/BOOTX64.EFI
-sudo sbctl sign -s /boot/EFI/systemd/systemd-bootx64.efi
-sudo sbctl sign -s -o /usr/lib/systemd/boot/efi/systemd-bootx64.efi.signed /usr/lib/systemd/boot/efi/systemd-bootx64.efi
-fi
-
 # installs all the applications and dependancies user would ever need (remember to tweak when finding apps you like and/or need).
-sudo pacman -S --noconfirm --needed budgie-desktop budgie-extras lightdm bluez blueman bluez-utils tilix nemo gtk-engine-murrine gtk-engines pipewire plank vlc fuse2 fuse3 intel-ucode ufw neofetch gnome-system-monitor sassc solaar gthumb gedit powerline-fonts sbctl steam base-devel git noto-fonts cups nss-mdns ghostscript xorg-server xorg-apps xorg-xinit xorg-twm xorg-xclock xterm
+sudo pacman -S --noconfirm --needed budgie-desktop budgie-extras lightdm bluez blueman bluez-utils tilix nemo gtk-engine-murrine gtk-engines pipewire plank vlc fuse2 fuse3 intel-ucode ufw neofetch gnome-system-monitor sassc solaar gthumb gedit powerline-fonts sbctl steam base-devel git noto-fonts cups nss-mdns ghostscript xorg-server xorg-apps xorg-xinit xorg-twm xorg-xclock xterm bash-completion nano dhcpcd networkmanager
 
 # build and install an AUR helper, yay.
 git clone https://aur.archlinux.org/yay.git
@@ -98,6 +84,9 @@ cd
 # enables the lightdm service.
 sudo systemctl enable lightdm
 
+# enables the network manager.
+sudo systemctl enable NetworkManager
+
 # enables bluetooth.
 sudo modprobe btusb
 sudo systemctl enable bluetooth
@@ -124,13 +113,13 @@ yay -R --noconfirm discord-canary-update-skip-git
 # delete git repos after everything has been installed.
 sudo rm -r yay WelcomeXP Tela-icon-theme Qogir-theme posy-improved-cursor-linux synth-shell
 
+# download appimage(s).
+wget "https://github.com/ppy/osu/releases/latest/download/osu.AppImage"
+
 # aggresively clean yay and pacman cache, and uninstall any unused dependencies.
 sudo pacman -Scc --noconfirm
 yay -Scc --noconfirm
 sudo pacman -Rsn --noconfirm $(pacman -Qdtq)
-
-# download appimages
-wget "https://github.com/ppy/osu/releases/latest/download/osu.AppImage"
 
 # create a 4GB swapfile and enable it (remember to adjust swappiness later).
 sudo dd if=/dev/zero of=/swapfile bs=1M count=4k status=progress
@@ -138,6 +127,14 @@ sudo chmod 0600 /swapfile
 sudo mkswap -U clear /swapfile
 sudo swapon /swapfile
 sudo echo "/swapfile none swap defaults 0 0" >> /etc/fstab
+
+# create, sign, and enroll keys to enable secure boot (will be unable to enroll the keys if setup mode is disabled, but everything else works).
+sudo sbctl create-keys
+sudo sbctl sign -s /boot/vmlinuz-linux
+sudo sbctl sign -s /boot/EFI/BOOT/BOOTX64.EFI
+sudo sbctl sign -s /boot/EFI/systemd/systemd-bootx64.efi
+sudo sbctl sign -s -o /usr/lib/systemd/boot/efi/systemd-bootx64.efi.signed /usr/lib/systemd/boot/efi/systemd-bootx64.efi
+sudo sbctl enroll-keys -m
 
 # arch btw.
 echo
