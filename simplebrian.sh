@@ -14,7 +14,6 @@ cd
 echo -e '\033[1mWelcome to the SimpleBrian installation script!\033[0m'
 echo
 echo -e '\033[1mBefore we run the script, it is important that you have recently used sudo, and run the script before the sudo timeout occurs (this is done if you want the script to run fully automated).\033[0m'
-echo -e '\033[1mPlease also make sure Secure Boot is in setup mode, so that we can create, sign, and enroll the necessary keys to enable Secure Boot (in the event you wish to dual-boot Windows).\033[0m'
 echo
 read -p "With that said, are you ready to install everything? [Y/N] " -r
 echo
@@ -29,8 +28,22 @@ sudo sed -i '38iILoveCandy' /etc/pacman.conf
 # update any outdated packages before officially beginning.
 sudo pacman -Syu --noconfirm
 
+# ask whether or not user has setup mode enable for secure boot, creating and enrolling the keys, and signing the kernels if so.
+read -p "Do you have Setup Mode enabled in Secure Boot (for dual-booting Windows)? [Y/N] " -r
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+# create, sign, and enroll keys to enable secure boot.
+sudo pacman -S sbctl
+sudo sbctl create-keys
+sudo sbctl enroll-keys -m
+sudo sbctl sign -s /boot/vmlinuz-linux
+sudo sbctl sign -s /boot/EFI/BOOT/BOOTX64.EFI
+sudo sbctl sign -s /boot/EFI/systemd/systemd-bootx64.efi
+sudo sbctl sign -s -o /usr/lib/systemd/boot/efi/systemd-bootx64.efi.signed /usr/lib/systemd/boot/efi/systemd-bootx64.efi
+fi
+
 # installs all the applications and dependancies user would ever need (remember to tweak when finding apps you like and/or need).
-sudo pacman -S --noconfirm budgie-desktop budgie-extras lightdm bluez blueman bluez-utils tilix nemo gtk-engine-murrine gtk-engines pipewire plank vlc fuse2 fuse3 intel-ucode ufw neofetch gnome-system-monitor sassc solaar gthumb gedit powerline-fonts sbctl steam base-devel git noto-fonts cups nss-mdns ghostscript xorg-server xorg-apps xorg-xinit xorg-twm xorg-xclock xterm
+sudo pacman -S --noconfirm --needed budgie-desktop budgie-extras lightdm bluez blueman bluez-utils tilix nemo gtk-engine-murrine gtk-engines pipewire plank vlc fuse2 fuse3 intel-ucode ufw neofetch gnome-system-monitor sassc solaar gthumb gedit powerline-fonts sbctl steam base-devel git noto-fonts cups nss-mdns ghostscript xorg-server xorg-apps xorg-xinit xorg-twm xorg-xclock xterm
 
 # build and install an AUR helper, yay.
 git clone https://aur.archlinux.org/yay.git
@@ -118,14 +131,6 @@ sudo pacman -Rsn --noconfirm $(pacman -Qdtq)
 
 # download appimages
 wget "https://github.com/ppy/osu/releases/latest/download/osu.AppImage"
-
-# create, sign, and enroll keys to enable secure boot.
-sudo sbctl create-keys
-sudo sbctl enroll-keys -m
-sudo sbctl sign -s /boot/vmlinuz-linux
-sudo sbctl sign -s /boot/EFI/BOOT/BOOTX64.EFI
-sudo sbctl sign -s /boot/EFI/systemd/systemd-bootx64.efi
-sudo sbctl sign -s -o /usr/lib/systemd/boot/efi/systemd-bootx64.efi.signed /usr/lib/systemd/boot/efi/systemd-bootx64.efi
 
 # create a 4GB swapfile and enable it (remember to adjust swappiness later).
 sudo dd if=/dev/zero of=/swapfile bs=1M count=4k status=progress
