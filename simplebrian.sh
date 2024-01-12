@@ -29,7 +29,7 @@ sudo sed -i '38iILoveCandy' /etc/pacman.conf
 sudo pacman -Syu --noconfirm
 
 # installs all the applications and dependancies user would ever need (remember to tweak when finding apps you like and/or need).
-sudo pacman -S --noconfirm --needed budgie-desktop budgie-extras lightdm bluez blueman bluez-utils tilix nemo gtk-engine-murrine gtk-engines pipewire plank vlc fuse2 fuse3 intel-ucode ufw neofetch gnome-system-monitor sassc solaar gthumb gedit powerline-fonts sbctl steam base-devel git noto-fonts cups nss-mdns ghostscript xorg-server xorg-apps xorg-xinit xorg-twm xorg-xclock xterm bash-completion nano dhcpcd networkmanager
+sudo pacman -S --noconfirm --needed budgie-desktop budgie-extras lightdm bluez blueman bluez-utils tilix nemo gtk-engine-murrine gtk-engines pipewire plank vlc fuse2 fuse3 intel-ucode ufw neofetch gnome-system-monitor sassc solaar gthumb gedit powerline-fonts sbctl steam base-devel git noto-fonts cups nss-mdns ghostscript xorg-server xorg-apps xorg-xinit xorg-twm xorg-xclock xterm bash-completion nano dhcpcd networkmanager wget
 
 # build and install an AUR helper, yay.
 git clone https://aur.archlinux.org/yay.git
