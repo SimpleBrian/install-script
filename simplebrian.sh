@@ -38,7 +38,7 @@ makepkg -si --noconfirm
 cd
 
 # use yay to install additional applications (spotify is a bitch and won't install half the time).
-yay -S indicator-sysmonitor-budgie-git vala-panel-appmenu-budgie-git web-greeter discord-canary spotify brave-bin p7zip-gui parsec-bin appimagelauncher libre-menu-editor opentabletdriver zoom prismlauncher discord-canary-update-skip-git --sudoloop --noconfirm
+yay -S indicator-sysmonitor-budgie-git vala-panel-appmenu-budgie-git web-greeter discord-canary spotify brave-bin p7zip-gui parsec-bin appimagelauncher libre-menu-editor opentabletdriver zoom prismlauncher discord-canary-update-skip-git vscodium-bin --sudoloop --noconfirm
 
 # make terminal hella fancy (and configure colors). must fix vte config later.
 git clone --recursive https://github.com/andresgongora/synth-shell.git
@@ -53,12 +53,9 @@ sed -i 's/^background_host=.*/background_host="18"/' .config/synth-shell/synth-s
 git clone https://github.com/mshernandez5/WelcomeXP.git
 mkdir WelcomeXP/fonts
 cd WelcomeXP/fonts
-wget "https://www.fontsupply.com/fonts/Fradmit.TTF"
-wget "https://github.com/adrienverge/copr-some-nice-fonts/raw/master/Tahoma.ttf"
-wget "https://github.com/adrienverge/copr-some-nice-fonts/raw/master/TahomaBd.ttf"
-mv Fradmit.TTF FRADMIT.TTF
-mv Tahoma.ttf tahoma.ttf
-mv TahomaBd.ttf tahomabd.ttf
+wget "https://github.com/SimpleBrian/install-script/raw/main/FRADMIT.TTF"
+wget "https://github.com/SimpleBrian/install-script/raw/main/tahoma.ttf"
+wget "https://github.com/SimpleBrian/install-script/raw/main/tahomabd.ttf"
 cd
 sudo cp -R WelcomeXP /usr/share/web-greeter/themes
 sudo chmod -R 755 /usr/share/web-greeter/themes/WelcomeXP
@@ -121,12 +118,13 @@ sudo pacman -Scc --noconfirm
 yay -Scc --noconfirm
 sudo pacman -Rsn --noconfirm $(pacman -Qdtq)
 
-# create a 4GB swapfile and enable it (remember to adjust swappiness later).
+# create a 4GB swapfile and enable it.
 sudo dd if=/dev/zero of=/swapfile bs=1M count=4k status=progress
 sudo chmod 0600 /swapfile
 sudo mkswap -U clear /swapfile
 sudo swapon /swapfile
 sudo echo "/swapfile none swap defaults 0 0" >> /etc/fstab
+sudo echo "vm.swappiness = 1" > /etc/sysctl.d/99-swappiness.conf
 
 # create, sign, and enroll keys to enable secure boot (will be unable to enroll the keys if setup mode is disabled, but everything else works).
 sudo sbctl create-keys
