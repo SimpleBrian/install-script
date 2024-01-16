@@ -124,7 +124,7 @@ sudo chmod 0600 /swapfile
 sudo mkswap -U clear /swapfile
 sudo swapon /swapfile
 sudo echo "/swapfile none swap defaults 0 0" >> /etc/fstab
-sudo echo "vm.swappiness = 1" > /etc/sysctl.d/99-swappiness.conf
+sudo su root -c "echo "vm.swappiness = 1" > /etc/sysctl.d/99-swappiness.conf"
 
 # create, sign, and enroll keys to enable secure boot (will be unable to enroll the keys if setup mode is disabled, but everything else works).
 sudo sbctl create-keys
