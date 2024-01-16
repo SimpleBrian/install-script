@@ -53,9 +53,9 @@ sed -i 's/^background_host=.*/background_host="18"/' .config/synth-shell/synth-s
 git clone https://github.com/mshernandez5/WelcomeXP.git
 mkdir WelcomeXP/fonts
 cd WelcomeXP/fonts
-wget "https://github.com/SimpleBrian/install-script/raw/main/FRADMIT.TTF"
-wget "https://github.com/SimpleBrian/install-script/raw/main/tahoma.ttf"
-wget "https://github.com/SimpleBrian/install-script/raw/main/tahomabd.ttf"
+wget "https://github.com/SimpleBrian/install-script/raw/main/fonts/FRADMIT.TTF"
+wget "https://github.com/SimpleBrian/install-script/raw/main/fonts/tahoma.ttf"
+wget "https://github.com/SimpleBrian/install-script/raw/main/fonts/tahomabd.ttf"
 cd
 sudo cp -R WelcomeXP /usr/share/web-greeter/themes
 sudo chmod -R 755 /usr/share/web-greeter/themes/WelcomeXP
