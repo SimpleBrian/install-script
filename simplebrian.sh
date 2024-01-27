@@ -25,20 +25,17 @@ then
 sudo sed -i 's/^#Color/Color/' /etc/pacman.conf
 sudo sed -i '38iILoveCandy' /etc/pacman.conf
 
-# update any outdated packages before officially beginning.
-sudo pacman -Syu --noconfirm
+# update any outdated packages and installs a few make dependencies before officially beginning.
+sudo pacman -Syu --needed --noconfirm git base-devel
 
-# installs all the applications and dependancies user would ever need (remember to tweak when finding apps you like and/or need).
-sudo pacman -S --noconfirm --needed budgie-desktop budgie-extras lightdm bluez blueman bluez-utils tilix nemo gtk-engine-murrine gtk-engines pipewire plank vlc fuse2 fuse3 intel-ucode ufw neofetch gnome-system-monitor sassc solaar gthumb gedit powerline-fonts sbctl steam base-devel git noto-fonts cups nss-mdns ghostscript xorg-server xorg-apps xorg-xinit xorg-twm xorg-xclock xterm bash-completion nano dhcpcd networkmanager wget
-
-# build and install an AUR helper, yay.
-git clone https://aur.archlinux.org/yay.git
-cd yay
+# build and install an AUR helper.
+git clone https://aur.archlinux.org/paru.git
+cd paru
 makepkg -si --noconfirm
 cd
 
-# use yay to install additional applications (spotify is a bitch and won't install half the time).
-yay -S indicator-sysmonitor-budgie-git vala-panel-appmenu-budgie-git web-greeter discord-canary spotify brave-bin p7zip-gui parsec-bin appimagelauncher libre-menu-editor opentabletdriver zoom prismlauncher discord-canary-update-skip-git vscodium-bin --sudoloop --noconfirm
+# use paru to install everything (using as pacman wrapper on top of AUR packages).
+paru -S budgie-desktop budgie-extras lightdm bluez blueman bluez-utils tilix nemo gtk-engine-murrine gtk-engines pipewire plank vlc fuse2 fuse3 intel-ucode ufw neofetch gnome-system-monitor sassc solaar gthumb gedit powerline-fonts sbctl steam noto-fonts cups nss-mdns ghostscript xorg-server xorg-apps xorg-xinit xorg-twm xorg-xclock xterm bash-completion nano dhcpcd networkmanager wget indicator-sysmonitor-budgie-git vala-panel-appmenu-budgie-git web-greeter discord-canary spotify brave-bin p7zip-gui parsec-bin appimagelauncher libre-menu-editor opentabletdriver zoom prismlauncher discord-canary-update-skip-git vscodium-bin --sudoloop --noconfirm
 
 # make terminal hella fancy (and configure colors). must fix vte config later.
 git clone --recursive https://github.com/andresgongora/synth-shell.git
@@ -105,17 +102,16 @@ sudo sed -i 's/^    theme:.*/    theme: WelcomeXP/' /etc/lightdm/web-greeter.yml
 
 # run the discord patch command, then uninstall.
 discord-canary-update-skip
-yay -R --noconfirm discord-canary-update-skip-git
+paru -R --noconfirm discord-canary-update-skip-git
 
 # delete git repos after everything has been installed.
-sudo rm -r yay WelcomeXP Tela-icon-theme Qogir-theme posy-improved-cursor-linux synth-shell
+sudo rm -r paru WelcomeXP Tela-icon-theme Qogir-theme posy-improved-cursor-linux synth-shell
 
 # download appimage(s).
 wget "https://github.com/ppy/osu/releases/latest/download/osu.AppImage"
 
-# aggresively clean yay and pacman cache, and uninstall any unused dependencies.
-sudo pacman -Scc --noconfirm
-yay -Scc --noconfirm
+# aggresively clean pacman and AUR caches, and uninstalls any unused dependencies.
+paru -Scc --noconfirm
 sudo pacman -Rsn --noconfirm $(pacman -Qdtq)
 
 # create a 4GB swapfile and enable it.
@@ -123,7 +119,7 @@ sudo dd if=/dev/zero of=/swapfile bs=1M count=4k status=progress
 sudo chmod 0600 /swapfile
 sudo mkswap -U clear /swapfile
 sudo swapon /swapfile
-sudo echo "/swapfile none swap defaults 0 0" >> /etc/fstab
+sudo su root -c "echo '/swapfile none swap defaults 0 0' >> /etc/fstab"
 sudo su root -c "echo 'vm.swappiness = 1' > /etc/sysctl.d/99-swappiness.conf"
 
 # create, sign, and enroll keys to enable secure boot (will be unable to enroll the keys if setup mode is disabled, but everything else works).
