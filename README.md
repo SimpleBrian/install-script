@@ -4,7 +4,7 @@
 this is a script designed to install all of my applications and dependencies, as well as configure some system settings (not all unfortunately) to get everything up and running.
 
 # how to use the script?
-the script is designed to run after you finish installing arch linux from ISO or any removable boot medium.
+the script is designed to be run after you finish installing arch linux from ISO or any removable boot medium (manually or via `archinstall`).
 it is also recommended to run the script within the sudo session limit to fully automate the process, though you may also run it without it 
 (not recommended, as you will need to enter in your password a few times, defeating the purpose of an automated script, but should be fine regardless).
 
@@ -22,6 +22,6 @@ wget https://github.com/SimpleBrian/install-script/raw/main/simplebrian.sh
 chmod +x simplebrian.sh
 ./simplebrian.sh
 ```
-do note that you cannot run the script directly with sudo, or as root, because the `makepkg` command to build and install `yay` will refuse to work in a root environment.
+do note that you cannot run the script directly with sudo, or as root, because the `makepkg` command to build and install `paru` will refuse to work in a root environment.
 this is a security measure the script works around by taking advantage of the sudo session created earlier to make prolific use of the sudo command, while also allowing `makepkg`
-to run in a non-root enviroment to install `yay` with.
+to run in a non-root enviroment to install `paru` with.
