@@ -33,7 +33,6 @@ steam
 tilix
 ufw
 vlc
-wget
 xorg-apps
 xorg-server
 xorg-twm
