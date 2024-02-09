@@ -34,8 +34,9 @@ cd paru
 makepkg -si --noconfirm
 cd
 
-# use paru to install everything (using as pacman wrapper on top of AUR packages).
-paru -Syu --needed budgie-desktop budgie-extras lightdm bluez blueman bluez-utils tilix nemo gtk-engine-murrine gtk-engines pipewire plank vlc fuse2 fuse3 intel-ucode ufw neofetch gnome-system-monitor sassc solaar gthumb gedit powerline-fonts sbctl steam noto-fonts cups nss-mdns ghostscript xorg-server xorg-apps xorg-xinit xorg-twm xorg-xclock xterm bash-completion nano dhcpcd networkmanager wget spotify-launcher indicator-sysmonitor-budgie-git vala-panel-appmenu-budgie-git web-greeter discord-canary brave-bin p7zip-gui parsec-bin appimagelauncher libre-menu-editor opentabletdriver zoom prismlauncher discord-canary-update-skip-git vscodium-bin --sudoloop --noconfirm
+# download package list and use paru to install everything (using as pacman wrapper on top of AUR packages).
+wget https://github.com/SimpleBrian/install-script/raw/main/packages.txt
+paru -Syu --needed --sudoloop --noconfirm < packages.txt
 
 # make terminal hella fancy (and configure colors). must fix vte config later.
 git clone --recursive https://github.com/andresgongora/synth-shell.git
