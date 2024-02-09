@@ -26,7 +26,7 @@ sudo sed -i 's/^#Color/Color/' /etc/pacman.conf
 sudo sed -i '38iILoveCandy' /etc/pacman.conf
 
 # update any outdated packages and installs a few make dependencies before officially beginning.
-sudo pacman -Syu --needed --noconfirm git base-devel
+sudo pacman -Syu --needed --noconfirm git base-devel wget
 
 # build and install an AUR helper.
 git clone https://aur.archlinux.org/paru.git
