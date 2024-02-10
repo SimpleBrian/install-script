@@ -36,7 +36,9 @@ cd
 
 # download package list and use paru to install everything (using as pacman wrapper on top of AUR packages).
 wget https://github.com/SimpleBrian/install-script/raw/main/packages.txt
+wget https://github.com/SimpleBrian/install-script/raw/main/aur_packages.txt
 paru -Syu --needed --sudoloop --noconfirm - < packages.txt
+paru -Syu --needed --sudoloop --noconfirm - < aur_packages.txt
 
 # make terminal hella fancy (and configure colors). must fix vte config later.
 git clone --recursive https://github.com/andresgongora/synth-shell.git
