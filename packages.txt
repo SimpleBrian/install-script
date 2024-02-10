@@ -12,6 +12,7 @@ fuse3
 gedit
 ghostscript
 gnome-system-monitor
+gthumb
 gtk-engine-murrine
 gtk-engines
 intel-ucode
@@ -27,7 +28,7 @@ plank
 powerline-fonts
 sassc
 sbctl
-solaargthumb
+solaar
 spotify-launcher
 steam
 tilix
