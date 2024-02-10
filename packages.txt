@@ -20,7 +20,7 @@ nano
 nemo
 neofetch
 networkmanager
-noto-fonts 
+noto-fonts
 nss-mdns
 pipewire
 plank
