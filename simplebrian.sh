@@ -107,8 +107,8 @@ sudo sed -i 's/^    theme:.*/    theme: WelcomeXP/' /etc/lightdm/web-greeter.yml
 discord-canary-update-skip
 paru -R --noconfirm discord-canary-update-skip-git
 
-# delete git repos after everything has been installed.
-sudo rm -r paru WelcomeXP Tela-icon-theme Qogir-theme posy-improved-cursor-linux synth-shell
+# delete git repos and package lists after everything has been installed.
+sudo rm -r paru WelcomeXP Tela-icon-theme Qogir-theme posy-improved-cursor-linux synth-shell packages.txt aur_packages.txt
 
 # download appimage(s).
 wget "https://github.com/ppy/osu/releases/latest/download/osu.AppImage"
