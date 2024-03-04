@@ -6,6 +6,7 @@ budgie-desktop
 budgie-extras
 cups
 dhcpcd
+flathub
 fuse2
 fuse3
 gedit

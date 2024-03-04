@@ -1,4 +1,3 @@
-appimagelauncher
 brave-bin
 discord-canary
 discord-canary-update-skip-git
@@ -7,7 +6,6 @@ libre-menu-editor
 opentabletdriver
 p7zip-gui
 parsec-bin
-prismlauncher
 vala-panel-appmenu-budgie-git
 vscodium-bin
 web-greeter

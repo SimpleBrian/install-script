@@ -1,0 +1,4 @@
+org.prismlauncher.PrismLauncher
+it.mijorus.gearlever
+com.obsproject.Studio
+rg.vinegarhq.Vinegar
