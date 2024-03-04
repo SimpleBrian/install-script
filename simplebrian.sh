@@ -34,7 +34,7 @@ cd paru
 makepkg -si --noconfirm
 cd
 
-# download package list and use paru to install everything (using as pacman wrapper on top of AUR packages).
+# download package list and use paru and flatpak to install everything (using paru as pacman wrapper on top of AUR packages).
 wget https://github.com/SimpleBrian/install-script/raw/main/packages.txt
 wget https://github.com/SimpleBrian/install-script/raw/main/aur_packages.txt
 wget https://github.com/SimpleBrian/install-script/raw/main/flatpaks.txt
@@ -110,7 +110,7 @@ discord-canary-update-skip
 paru -R --noconfirm discord-canary-update-skip-git
 
 # delete git repos and package lists after everything has been installed.
-sudo rm -r paru WelcomeXP Tela-icon-theme Qogir-theme posy-improved-cursor-linux synth-shell packages.txt aur_packages.txt
+sudo rm -r paru WelcomeXP Tela-icon-theme Qogir-theme posy-improved-cursor-linux synth-shell packages.txt aur_packages.txt flatpaks.txt
 
 # download appimage(s).
 wget "https://github.com/ppy/osu/releases/latest/download/osu.AppImage"
