@@ -37,6 +37,7 @@ cd
 # download package list and use paru to install everything (using as pacman wrapper on top of AUR packages).
 wget https://github.com/SimpleBrian/install-script/raw/main/packages.txt
 wget https://github.com/SimpleBrian/install-script/raw/main/aur_packages.txt
+wget https://github.com/SimpleBrian/install-script/raw/main/flatpaks.txt
 paru -Syu --needed --sudoloop --noconfirm - < packages.txt
 paru -Syu --needed --sudoloop --noconfirm - < aur_packages.txt
 flatpak install -y $(< flatpaks.txt)
