@@ -1,4 +1,3 @@
-org.prismlauncher.PrismLauncher
 it.mijorus.gearlever
-com.obsproject.Studio
-org.vinegarhq.Vinegar
+io.github.shiftey.Desktop
+com.feaneron.Boatswain
