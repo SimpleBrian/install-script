@@ -6,7 +6,7 @@ libre-menu-editor
 opentabletdriver
 p7zip-gui
 parsec-bin
-prismlauncher-qt5-bin
+prismlauncher
 vala-panel-appmenu-budgie-git
 vscodium-bin
 web-greeter
