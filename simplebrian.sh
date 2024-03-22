@@ -40,7 +40,7 @@ wget https://github.com/SimpleBrian/install-script/raw/main/aur_packages.txt
 wget https://github.com/SimpleBrian/install-script/raw/main/flatpaks.txt
 paru -Syu --needed --sudoloop --noconfirm - < packages.txt
 paru -Syu --needed --sudoloop --noconfirm - < aur_packages.txt
-flatpak install -y $(< flatpaks.txt)
+sudo flatpak install -y $(< flatpaks.txt)
 
 # make terminal hella fancy (and configure colors). must fix vte config later.
 git clone --recursive https://github.com/andresgongora/synth-shell.git
