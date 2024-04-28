@@ -18,7 +18,7 @@ this will also start (or refresh) the sudo session, which lasts for 5 minutes by
 # run teh script.
 quickly download the latest script, make it executable, and run it.
 ```
-wget https://github.com/SimpleBrian/install-script/raw/main/simplebrian.sh
+wget https://github.com/SimpleBrian/post-install/raw/main/simplebrian.sh
 chmod +x simplebrian.sh
 ./simplebrian.sh
 ```
