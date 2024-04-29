@@ -35,9 +35,9 @@ makepkg -si --noconfirm
 cd
 
 # download package list and use paru and flatpak to install everything (using paru as pacman wrapper on top of AUR packages).
-wget https://github.com/SimpleBrian/install-script/raw/main/packages.txt
-wget https://github.com/SimpleBrian/install-script/raw/main/aur_packages.txt
-wget https://github.com/SimpleBrian/install-script/raw/main/flatpaks.txt
+wget https://github.com/SimpleBrian/post-install/raw/main/packages.txt
+wget https://github.com/SimpleBrian/post-install/raw/main/aur_packages.txt
+wget https://github.com/SimpleBrian/post-install/raw/main/flatpaks.txt
 paru -Syu --needed --sudoloop --noconfirm - < packages.txt
 paru -Syu --needed --sudoloop --noconfirm - < aur_packages.txt
 sudo flatpak install -y $(< flatpaks.txt)
@@ -55,9 +55,9 @@ sed -i 's/^background_host=.*/background_host="18"/' .config/synth-shell/synth-s
 git clone https://github.com/mshernandez5/WelcomeXP.git
 mkdir WelcomeXP/fonts
 cd WelcomeXP/fonts
-wget "https://github.com/SimpleBrian/install-script/raw/main/fonts/FRADMIT.TTF"
-wget "https://github.com/SimpleBrian/install-script/raw/main/fonts/tahoma.ttf"
-wget "https://github.com/SimpleBrian/install-script/raw/main/fonts/tahomabd.ttf"
+wget "https://github.com/SimpleBrian/post-install/raw/main/fonts/FRADMIT.TTF"
+wget "https://github.com/SimpleBrian/post-install/raw/main/fonts/tahoma.ttf"
+wget "https://github.com/SimpleBrian/post-install/raw/main/fonts/tahomabd.ttf"
 cd
 sudo cp -R WelcomeXP /usr/share/web-greeter/themes
 sudo chmod -R 755 /usr/share/web-greeter/themes/WelcomeXP
